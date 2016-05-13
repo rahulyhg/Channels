@@ -6,11 +6,18 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.LinearLayout;
+
+import com.vontell.channels.resources.Channel;
+import com.vontell.channels.resources.ViewHelper;
 
 public class MainActivity extends AppCompatActivity {
+
+    private LinearLayout channelsLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,6 +33,13 @@ public class MainActivity extends AppCompatActivity {
                 createNewChannel();
             }
         });
+
+        // Load the view that will hold all channels
+        channelsLayout = (LinearLayout) findViewById(R.id.channels_layout);
+
+        // Load and show all channels
+        showChannels();
+
     }
 
     @Override
@@ -51,11 +65,28 @@ public class MainActivity extends AppCompatActivity {
     }
 
     /**
+     * Displays all channels this user wants
+     */
+    private void showChannels() {
+
+        Channel[] channels = ViewHelper.getTestChannels();
+
+        for(Channel channel : channels) {
+            Log.d("DISP", "Showing channel \'" + channel.getName() + "\'");
+            ViewHelper.addChannelView(this, channel, (LinearLayout) findViewById(R.id.channels_layout));
+        }
+
+    }
+
+    /**
      * Opens a dialog to create a new channel on the backend
      */
     private void createNewChannel() {
 
+        Snackbar snackbar = Snackbar
+                .make(findViewById(R.id.coordinator), "You created a channel!", Snackbar.LENGTH_SHORT);
 
+        snackbar.show();
 
     }
 

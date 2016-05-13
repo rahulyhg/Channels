@@ -1,4 +1,10 @@
 <resources>
     <string name="app_name">Channels</string>
     <string name="action_settings">Settings</string>
+
+    <!-- Defaults -->
+
+    <string name="channel_view_title_default">Channel Title</string>
+    <string name="channel_view_count_default">### Registered</string>
+
 </resources>
